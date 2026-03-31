@@ -1,30 +1,213 @@
 <!doctype html>
-<html lang="en"> 
- <head> 
-  <meta charset="UTF-8"> 
-  <title>Happy Birthday</title> 
-  <link rel="stylesheet" href="style.css"> 
- </head> 
- <body> 
-  <div class="card"> 
-   <img src="Gambar WhatsApp 2025-02-15 pukul 21.07.25_3344aa14.jpg" alt="birthday" class="birthday"> 
-   <div class="text"> 
-    <h1>Halo Putriii!</h1> 
-    <p>selamatt ulang tahunn putriii, semoga dengan umur mu yang bertambah inii, kamu tetep jadi orang yang baik, sehat selalu, berbakti sama kedua orang tua mu, cita cita yang kamu impikan semoga terwujud. Aamiin🎉🎂
-    <br><br>
-Aku aku mau ngucapin makasih udah nemenin aku selama ini, makasih juga udah selalu ada untuk ku, aku seneng banget bisa ketemu orang kaya kamu put,ga nyangka dari orang yang dulu ga ku kenal bisa jadi orang yang paling ku sayanggg ,makasih banyak puttt, aku seneng bisa sama kamu, aku suka semua yang ada di diri kamu, dari cara mu memperlakukan aku, marah mu ke akuu, semuanyaaaa aku suka, makasih banyak puttt, intinya aku sayang bangett sama kamuu,kamu bisa ngubah hidup ku jadi kaya sekarang ini, makasih banyak putttt, makasihhh yaaaa.🎉🎂
-<br><br>
+<html lang="id">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PESAN EMAIL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&amp;family=Inter:wght@200;400&amp;display=swap" rel="stylesheet">
+  <style>
+        :root { --bg: #055; --text: #d1d1d1; --accent: #c62828; }
+        
+        /* Reset & Base Style */
+        html, body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            width: 100%;
+            height: 100%;
+        }
 
-aku juga mau minta maaf kalo sifat ku ini ga sesuai sama yang kamu harap, aku ga bisa ngertiin perasaan mu, ga kaya cowo cowo lain, yang mungkin pernah kamu temui,maaf yaaa,aku minta maaf, maaf juga aku ga bisa selalu ada di sampingmuuu, sekali lagi aku ucapin makasihh buat kamuu, makasih puttt,semoga aku bisa nemenin di ulang tahun yang ada di tahun tahun berikutnya yaaa, Aamiin..🎉🎂
-<br><br>
-<h5>SELAMATT ULANGG TAHUNN YAAAA!!!</h5>  🎉🎂</p> 
-    <p class="muted">- Desta -</p> 
-   </div> 
-   <div class="space"></div> 
-   <audio controls autoplay> 
-    <source src="hbd.mp3" type="audio/mp3"> Your browser does not support the audio element. 
-   </audio> 
-   <script src="script.js"></script>
-  </div> 
+        /* Hilangkan scroll saat loading/start */
+        body.no-scroll {
+            overflow: hidden;
+        }
+
+        /* Loading Screen */
+        #loader {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(255,255,255,0.1);
+            border-top: 2px solid var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Start Screen */
+        #start-screen {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+            display: none;
+            animation: fadeIn 2s ease;
+        }
+
+        #start-btn {
+            padding: 15px 40px;
+            background: none;
+            border: 1px solid #333;
+            color: #888;
+            cursor: pointer;
+            letter-spacing: 4px;
+            font-size: 0.8rem;
+            transition: 0.8s;
+            text-transform: uppercase;
+        }
+        #start-btn:hover { border-color: #fff; color: #fff; box-shadow: 0 0 15px rgba(255,255,255,0.1); }
+
+        /* Area Surat Utama */
+        #main-content {
+            display: none;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 100px 0; /* Memberi ruang atas bawah saat scroll */
+        }
+
+        .letter-wrapper {
+            max-width: 700px;
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        .letter {
+            line-height: 2.2;
+            text-align: justify;
+            white-space: pre-wrap;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-style: italic;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 2.5s ease;
+        }
+
+        .show-letter { opacity: 1; transform: translateY(0); }
+
+        .signature {
+            margin-top: 80px;
+            text-align: right;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            opacity: 0.6;
+            padding-bottom: 100px; /* Jarak akhir agar tidak mentok bawah */
+        }
+
+        #player { position: fixed; top: -9999px; left: -9999px; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+ </head>
+ <body class="no-scroll">
+  <div id="loader">
+   <div class="spinner"></div>
+   <p style="letter-spacing: 3px; font-size: 10px; opacity: 0.5;">Mohon Tunggu...</p>
+  </div>
+  <div id="start-screen">
+   <button id="start-btn" onclick="jalankanPesan()">Silahkan  Di Buka</button>
+  </div>
+  <div id="main-content">
+   <div id="player"></div>
+   <div class="letter-wrapper">
+    <div class="letter" id="letter-text">
+Sayang…
+
+Aku membaca setiap kata yang kamu tulis, dan jujur saja, tidak ada satu pun yang terasa ringan untuk diterima. Kamu meminta maaf, tapi yang kurasakan justru bukan kesalahan, melainkan luka yang selama ini kita pendam tanpa pernah benar-benar kita hadapi bersama.
+
+Kamu bilang kamu tidak cukup kuat untuk tetap di sampingku. Tapi bagiku, kamu tidak pernah lemah. Kamu hanya terlalu lama menahan semuanya sendirian… dan aku yang seharusnya menyadari itu, malah sibuk dengan duniaku sendiri.
+
+Aku memang terbiasa berdiri di tengah kekacauan, mengambil keputusan cepat, menghadapi bahaya tanpa ragu. Tapi soal kita… aku akui, aku gagal membaca situasi yang paling dekat denganku. Aku pikir selama aku masih bisa pulang, semuanya akan baik-baik saja. Ternyata, hadir secara fisik tidak selalu berarti benar-benar ada.
+
+Rumah yang kamu bilang mulai kehilangan hangatnya… itu juga tanggung jawabku. Aku tidak akan menyangkal itu.
+
+Tapi dengar ini baik-baik,
+Kamu bukan “bagian kecil” dalam hidupku. Kamu adalah alasan kenapa aku selalu ingin kembali, seberat apa pun tugas di luar sana.
+
+Keputusanmu untuk pergi… aku tidak akan menahannya kalau itu memang yang kamu butuhkan untuk menyembuhkan diri. Aku tidak punya hak untuk memaksa kamu tetap bertahan dalam keadaan yang membuatmu kehilangan dirimu sendiri.
+
+Tapi jangan pernah berpikir bahwa kamu adalah beban dalam hidupku. Kamu tidak pernah begitu.
+
+Kalau suatu hari nanti kamu menemukan kembali dirimu, menemukan kembali tenang yang kamu cari… aku hanya berharap, kamu juga masih mengingat bahwa pernah ada tempat di mana kita mencoba berjuang bersama, meskipun akhirnya kita tidak berhasil mempertahankannya.
+
+Aku akan tetap berdiri di garis tugasku, seperti biasa.
+Dan kamu… jagalah dirimu, bukan karena aku memintanya, tapi karena kamu memang berharga, dengan atau tanpa aku di sisimu.
+
+Terima kasih… untuk semua yang pernah kita punya.
+Dan untuk cinta yang, meskipun berubah bentuk, tidak pernah benar-benar hilang.
+     <div class="signature">— Louis Tridd</div>
+    </div>
+   </div>
+  </div>
+  <script>
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '0', width: '0',
+                videoId: 'gK2rLFnUyyM',
+                playerVars: { 'autoplay': 0, 'controls': 0, 'loop': 1, 'playlist': 'gK2rLFnUyyM' }
+            });
+        }
+
+        function bicara() {
+            if ('speechSynthesis' in window) {
+                const msg = new SpeechSynthesisUtterance();
+                msg.text = "Silahkan dibuka louis";
+                msg.lang = 'id-ID';
+                msg.rate = 0.7;
+                window.speechSynthesis.speak(msg);
+            }
+        }
+
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(function() {
+                    document.getElementById('loader').style.display = 'none';
+                    document.getElementById('start-screen').style.display = 'block';
+                    bicara();
+                }, 1000);
+            }, 2500);
+        });
+
+        function jalankanPesan() {
+            // Aktifkan scroll di body (hanya satu scrollbar paling kanan)
+            document.body.classList.remove('no-scroll');
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('main-content').style.display = 'flex';
+            
+            if (player && player.playVideo) {
+                player.playVideo();
+            }
+
+            setTimeout(function() {
+                document.getElementById('letter-text').classList.add('show-letter');
+            }, 300);
+        }
+    </script>
  </body>
-</html>
+ </html>
